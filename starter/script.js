@@ -104,7 +104,7 @@ class PersonCl {
   // Instance methods
   // Methods will be added to .prototype property
   clacAge() {
-    // console.log(2037 - this.birthYear);
+    console.log(2037 - this.birthYear);
   }
   greet() {
     // console.log(`Hey ${this.firstName}`);
@@ -303,9 +303,39 @@ EV.prototype.accelerate = function () {
 
 const elon = new EV('Tesla', 120, 23);
 
-elon.accelerate();
-elon.brake();
-elon.accelerate();
-elon.chargeBattery(90);
-elon.accelerate();
-elon.accelerate();
+// elon.accelerate();
+// elon.brake();
+// elon.accelerate();
+// elon.chargeBattery(90);
+// elon.accelerate();
+// elon.accelerate();
+
+// Lec 217 Inheritance btwn Classes (ES6 classes)
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // Always needs to happen first
+    super(fullName, birthYear);
+    this.course = course;
+  }
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  clacAge() {
+    console.log(
+      `I'm ${
+        2037 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+// const martha = new StudentCl('Martha Jones', 2012); //(doesn't need constructor fn in student class)
+const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+martha.introduce();
+martha.clacAge();
+
+// Lec 218
