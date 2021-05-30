@@ -365,72 +365,78 @@ jay.init('Jay', 2010, 'Computer Science');
 // (there is also the static version)
 
 // Lec 219 Another class example
+
 class Account {
-  // 1) Public fields (instances)
+  // 1 Public fields (instances)
   locale = navigator.language;
 
-  // 2) Private fields
+  // 2 Private fields (instances)
   #movements = [];
   #pin;
 
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    // Protected Property
     this.#pin = pin;
-    // this._movements = [];
+    // this.movements = [];
     // this.locale = navigator.language;
 
-    console.log(`Thanks for opening an account, ${owner}`);
+    console.log(`Thanks for opening an account, ${this.owner}`);
   }
+  // 3 Public methods
 
-  // 3)Public methods
   // Public interface
   getMovements() {
     return this.#movements;
   }
 
-  deposit(val) {
+  deposite(val) {
     this.#movements.push(val);
+    return this;
   }
+
   withdraw(val) {
-    this.deposit(-val);
+    this.deposite(-val);
+    return this;
   }
 
   requestLoan(val) {
+    // if (this.#approveLoan(val)) {
     if (this._approveLoan(val)) {
-      this.deposit(val);
+      this.deposite(val);
       console.log(`Loan approved`);
+      return this;
     }
   }
 
   static helper() {
     console.log('Helper');
   }
-  // 4)Private methods
+
+  // 4 Private
   // #approveLoan(val) {
   _approveLoan(val) {
     return true;
   }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 1111);
+const acc1 = new Account('Syed', 'EUR', 1111);
 
-// acc1._movements.push(250);
-// acc1._movements.push(-50);
-acc1.deposit(250);
-acc1.withdraw(40);
+// acc1.movements.push(250);
+// acc1.movements.push(-130);
+acc1.deposite(250);
+acc1.withdraw(130);
 acc1.requestLoan(1000);
 console.log(acc1.getMovements());
-
 console.log(acc1);
 console.log(acc1.pin);
-
-// Lec 220 Ecapsulation: Protected Properties and Methods
-// console.log(acc1.#movements);
-// console.log(acc1.#pin);
-// acc1.#approveLoan(300);
-
 Account.helper();
 
-// Lec 222 Chaining Methods
+// console.log(acc1.movements);
+// console.log(acc1.#pin);
+
+// Lec 222 Chaining
+
+acc1.deposite(300).deposite(500).withdraw(35).requestLoan(25000).withdraw(4000);
+
+console.log(acc1.getMovements());
