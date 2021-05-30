@@ -440,3 +440,38 @@ Account.helper();
 acc1.deposite(300).deposite(500).withdraw(35).requestLoan(25000).withdraw(4000);
 
 console.log(acc1.getMovements());
+
+// Lec 224 Coding Challenge 4
+
+class EVCl extends CarCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+  accelerate() {
+    this.speed = this.speed + 10;
+    this.#charge = this.#charge - 1;
+    console.log(
+      `${this.make} going at ${this.speed} km/h  with charge ${this.#charge}`
+    );
+    return this;
+  }
+  brake() {
+    this.speed = this.speed - 7;
+    console.log(
+      `${this.make} going at ${this.speed} km/h with charge ${this.#charge}`
+    );
+    return this;
+  }
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+}
+
+const rivian = new EVCl('Rivian', 120, 23);
+
+console.log(rivian);
+
+rivian.accelerate().brake().brake().chargeBattery(50).brake().accelerate();
